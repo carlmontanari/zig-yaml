@@ -2,11 +2,11 @@ const std = @import("std");
 const mem = std.mem;
 const testing = std.testing;
 
+const Parser = @import("../Parser.zig");
+const Tree = @import("../Tree.zig");
 const List = Tree.List;
 const Map = Tree.Map;
 const Node = Tree.Node;
-const Parser = @import("../Parser.zig");
-const Tree = @import("../Tree.zig");
 
 fn expectNodeScope(tree: Tree, node: Node.Index, from: usize, to: usize) !void {
     const scope = tree.nodeScope(node);
@@ -634,7 +634,7 @@ fn parseError2(source: []const u8, comptime format: []const u8, args: anytype) !
 
     const expected = try std.fmt.allocPrint(testing.allocator, format, args);
     defer testing.allocator.free(expected);
-    try testing.expectEqualStrings(expected, given.getWritten());
+    try testing.expectEqualStrings(expected, given.written());
 }
 
 test "empty doc with spaces and comments" {

@@ -124,7 +124,7 @@ fn make(step: *Step, make_options: Step.MakeOptions) !void {
         }
     }
 
-    var output = std.ArrayList(u8).init(arena);
+    var output = std.array_list.Managed(u8).init(arena);
     const writer = output.writer();
     try writer.writeAll(preamble);
 
@@ -167,7 +167,7 @@ fn collectTest(arena: Allocator, entry: fs.Dir.Walker.Entry, testcases: *std.Str
     var path_components_it = try std.fs.path.componentIterator(entry.path);
     const first_path = path_components_it.first().?;
 
-    var path_components = std.ArrayList([]const u8).init(arena);
+    var path_components = std.array_list.Managed([]const u8).init(arena);
     while (path_components_it.next()) |component| {
         try path_components.append(component.name);
     }
@@ -596,7 +596,7 @@ const expect_err_template =
     \\
 ;
 
-fn emitTest(arena: Allocator, output: *std.ArrayList(u8), testcase: Testcase) !void {
+fn emitTest(arena: Allocator, output: *std.array_list.Managed(u8), testcase: Testcase) !void {
     const head = try std.fmt.allocPrint(arena, "test \"{f}\" {{\n", .{
         std.zig.fmtString(testcase.name),
     });

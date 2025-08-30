@@ -1,9 +1,9 @@
 const std = @import("std");
 const mem = std.mem;
-const stringify = @import("../stringify.zig").stringify;
 const testing = std.testing;
-
 const Arena = std.heap.ArenaAllocator;
+
+const stringify = @import("../stringify.zig").stringify;
 const Yaml = @import("../Yaml.zig");
 
 test "simple list" {
@@ -729,7 +729,7 @@ fn testStringify(expected: []const u8, input: anytype) !void {
     defer writer.deinit();
 
     try stringify(testing.allocator, input, &writer.writer);
-    try testing.expectEqualStrings(expected, writer.getWritten());
+    try testing.expectEqualStrings(expected, writer.written());
 }
 
 test "stringify an int" {

@@ -1,9 +1,9 @@
-const Tokenizer = @This();
-
 const std = @import("std");
-const log = std.log.scoped(.tokenizer);
 const testing = std.testing;
 
+const Tokenizer = @This();
+
+const log = std.log.scoped(.tokenizer);
 buffer: []const u8,
 index: usize = 0,
 in_flow: usize = 0,
@@ -330,7 +330,7 @@ fn testExpected(source: []const u8, expected: []const Token.Id) !void {
         .buffer = source,
     };
 
-    var given = std.ArrayList(Token.Id).init(testing.allocator);
+    var given = std.array_list.Managed(Token.Id).init(testing.allocator);
     defer given.deinit();
 
     while (true) {
