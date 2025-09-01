@@ -2,19 +2,17 @@ const std = @import("std");
 const assert = std.debug.assert;
 const math = std.math;
 const mem = std.mem;
+const log = std.log.scoped(.yaml);
+
 const Allocator = mem.Allocator;
 const ArenaAllocator = std.heap.ArenaAllocator;
 const ErrorBundle = std.zig.ErrorBundle;
-
+const Node = Tree.Node;
 const Parser = @import("Parser.zig");
 const ParseError = Parser.ParseError;
 const Tokenizer = @import("Tokenizer.zig");
 const Token = Tokenizer.Token;
 const Tree = @import("Tree.zig");
-const Node = Tree.Node;
-
-const log = std.log.scoped(.yaml);
-
 const Yaml = @This();
 
 source: []const u8,

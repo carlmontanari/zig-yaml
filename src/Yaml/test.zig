@@ -1,9 +1,9 @@
 const std = @import("std");
 const mem = std.mem;
-const testing = std.testing;
-const Arena = std.heap.ArenaAllocator;
-
 const stringify = @import("../stringify.zig").stringify;
+const testing = std.testing;
+
+const Arena = std.heap.ArenaAllocator;
 const Yaml = @import("../Yaml.zig");
 
 test "simple list" {

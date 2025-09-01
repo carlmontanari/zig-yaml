@@ -1,9 +1,9 @@
-const std = @import("std");
-const testing = std.testing;
-
 const Tokenizer = @This();
 
+const std = @import("std");
 const log = std.log.scoped(.tokenizer);
+const testing = std.testing;
+
 buffer: []const u8,
 index: usize = 0,
 in_flow: usize = 0,
